@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\TopController;
+use App\Http\Controllers\InstrumentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get("/", [InstrumentController::class, "index"])->name("top.index");
