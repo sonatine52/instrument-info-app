@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Instrument;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class InstrumentController extends Controller
@@ -10,9 +11,9 @@ class InstrumentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() {
-        $instruments = Instrument::All();
-        return view('top.index', compact('instruments'));
+    public function index() 
+    {
+        //
     }
 
     /**
@@ -36,7 +37,7 @@ class InstrumentController extends Controller
      */
     public function show(Instrument $instrument)
     {
-        //
+
     }
 
     /**
