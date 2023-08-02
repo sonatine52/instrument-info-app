@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('instruments', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->text('content');
-            $table->integer('category_name');
+        Schema::table('accessories', function(Blueprint $table) {
             $table->string('img');
-            $table->timestamps();
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('instruments');
+        Schema::table('accessories', function(Blueprint $table) {
+            $table->dropColumn('img');
+        });
     }
 };

@@ -21,5 +21,8 @@
 }
 
 .flex-basis {
-    flex-basis: 100px;
+    flex-basis: auto;
+    margin: 10px;
+    padding: 10px;
+    border: solid 3px gray;
 }

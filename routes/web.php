@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\TopController;
 use App\Http\Controllers\InstrumentController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DetailController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/", [InstrumentController::class, "index"])->name("top.index");
+Route::get("/", [TopController::class, "index"])->name("top.index");
+
+Route::get("/instrument/{id}", [DetailController::class, "index"])->name("instrument.detail");

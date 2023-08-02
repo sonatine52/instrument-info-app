@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('instruments', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->text('content');
-            $table->integer('category_name');
-            $table->string('img');
-            $table->timestamps();
+        Schema::table('instruments', function (Blueprint $table) {
+            $table->dropColumn('category_name');
+            $table->integer('category_id');
         });
     }
 
@@ -26,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('instruments');
+        Schema::table('instruments', function (Blueprint $table) {
+            $table->string('category_name');
+            $table->dropColumn('category_id');
+        });
     }
 };
