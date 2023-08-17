@@ -9,8 +9,8 @@ use App\Models\Instrument;
 class DetailController extends Controller
 {
     public function index($id) {
-        $instrument = Instrument::find($id);
         $categories = Category::all();
-        return view('top.show', compact('instrument','categories'));
+        $instrument = Instrument::find($id);
+        return view('top.show', compact('categories','instrument'));
     }
 }

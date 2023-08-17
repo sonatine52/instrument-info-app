@@ -9,20 +9,17 @@
 
 @section("content")
 
-    {{-- DBのinstrumentsテーブルのnameとcontentを順番に表示する --}}
-
-    <div class="display-flex">
-        @foreach ($categories as $category)
-            @foreach ($category->instruments as $instrument)
-            
-                <div class="flex-basis">
+    @foreach ($categories as $category)
+        @foreach ($category->instruments as $instrument)
+            <a href="{{ route('instrument.detail', $instrument->id) }}">
+                <div class="content">
                     <h3>{{ $instrument->name }}</h3>
                     <p>{{ $instrument->content }}</p>
-                    {{-- <img src="{{ asset('/images/trumpet.png') }}" width="200" height="200"> --}}
-                    <img src="{{ asset('/images/' . $instrument->img) }}"  width=200px height=200px>
+                    {{-- <img src="{{ asset($instrument->img) }}"  width=200px height=200px> --}}
+                    <img src="{{ asset('images/'. $instrument->img) }}"  width=150px>
                 </div>
-            @endforeach
+            </a>
         @endforeach
-    </div>
+    @endforeach
 
 @endsection

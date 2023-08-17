@@ -8,24 +8,18 @@
 
 
 @section("content")
-
-    <h3>{{$instrument->name}}</h3>
-        {{-- 説明の表示 --}}
-        <p>{{$instrument->content}}</p>
-        
+    <div>
+        <h3>{{$instrument->name}}</h3>
+        <img src="{{ asset('images/'. $instrument->img) }}" alt="" width=200px>
         {{-- ブランドの表示。カラムが足りない --}}
-
-        
+        <p>{{$instrument->content}}</p>
+    </div>
+    <div>
         <h3>周辺機器</h3>
-        {{-- 楽器の画像の表示 --}}
-        <img src="{{ asset('/images/' . $instrument->img) }}"  width=200px height=200px>
-        
         @foreach ($instrument->accessories as $accessory)
-            {{-- 画像の左右に周辺機器の画像と名前の表示 --}}
-            <img src="{{$accessory->img}}" alt="">
             <p>{{$accessory->name}}</p>
-            
-        
+            <img src="{{ asset('images/'. $accessory->img) }}" alt="" width=100px>
+            <p>{{$accessory->content}}</p>
         @endforeach
-
+    </div>
 @endsection
