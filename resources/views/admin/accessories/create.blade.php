@@ -27,7 +27,7 @@
         @endif
 
         {{-- フォーム --}}
-        <form action="{{ route('admin.accessories.store') }}" method="post">
+        <form action="{{ route('admin.accessories.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div>
                 <label for="">機器名</label><br>
@@ -36,7 +36,6 @@
 
             <div>
                 <label for="">画像</label><br>
-                {{-- 画像(仮) --}}
                 <input type="file" name="img" accept="image/*" onchange="previewImage(this);"><br>
                 {{-- 選択したファイルを表示する --}}
                 <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="max-width:200px;" alt="" border="1">

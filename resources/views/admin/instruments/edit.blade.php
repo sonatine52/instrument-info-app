@@ -26,7 +26,7 @@
         @endif
 
         {{-- フォーム --}}
-        <form action="{{ route('admin.instruments.update', $instrument) }}" method="post">
+        <form action="{{ route('admin.instruments.update', ['id'=>$instrument->id]) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('patch')
             <div>
@@ -40,11 +40,10 @@
             </div><br>
 
             <div>
-                {{-- 画像(仮) --}}
                 <label for="">画像</label><br>
                 <div>
                     <p>&lt;更新前&gt;</p>
-                    <img src="{{ asset('images/'. $instrument->img) }}" alt="" style="max-width:200px;" border="1">
+                    <img src="{{ asset(str_starts_with($instrument->img, 'images/') ? $instrument->img : 'images/'. $instrument->img) }}" alt="" style="max-width:200px;" border="1">
                 </div>
                 <div>
                     <p>&lt;更新後&gt;</p>
@@ -64,7 +63,7 @@
                     <option value="">選択されていません</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}" 
-                            @if ( old('category_id', $instrument->category_id) == $category_id ) 
+                            @if ( old('category_id', $instrument->category_id) == $category->id ) 
                                 selected 
                             @endif>{{ $category->name }}
                         </option>

@@ -19,9 +19,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+// トップページ
 Route::get("/", [TopController::class, "index"])->name("top.index");
 
+// 紹介ページ
 Route::get("/instrument/{id}", [DetailController::class, "index"])->name("instrument.detail");
 
 // admin認証機能用のルーティング

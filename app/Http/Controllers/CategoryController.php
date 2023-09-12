@@ -38,11 +38,12 @@ class CategoryController extends Controller
     }
 
     // 更新機能
-    public function update(Request $request, Category $category) {
+    public function update(Request $request, $id) {
         $request->validate([
             'name' => 'required',
         ]);
-
+        
+        $category = Category::find($id);
         $category->name = $request->input('name');
         $category->save();
 

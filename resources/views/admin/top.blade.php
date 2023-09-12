@@ -10,9 +10,9 @@
 
 <body>
     <header>
-        <h1 class="display-inline">管理者メニュー</h1>
+        <h1>管理者メニュー</h1>
         {{-- <p class="display-inline">{{ Auth::user()->name }}</p> --}}
-        <div class="display-inline">
+        <div>
             <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                 <button>{{ __('Logout') }}</button>
             </a>

@@ -9,7 +9,10 @@
         @foreach ($category->instruments as $instrument)
         {{-- <li><a href="{{ route("instrument.detail", $id=$instrument->id) }}">{{$instrument->name}}</a> --}}
             <li><a href="{{ route("instrument.detail", ['id'=>$instrument->id]) }}">{{$instrument->name}}</a>
-                <ul>
+                    @if($instrument->accessories->count() > 0)
+                        <span class="sidemenu-btn">▼</span>
+                    @endif
+                <ul class="sidemenu-hidden">
                     @foreach ($instrument->accessories as $accessory)
                         <li><a href="">{{$accessory->name}}</li></a>
                     @endforeach
@@ -18,3 +21,4 @@
         @endforeach
     </ul>
 @endforeach
+<br>

@@ -10,17 +10,12 @@
 
 <body>
     <header>
-        <div class="flexbox-container">
-            <h1 class="flexbox-item">@yield("header")</h1>
-            {{-- <h1 class="display-inline">@yield("header")</h1> --}}
+        <h1>@yield("header")</h1>
             
-            {{-- 検索機能 --}}
-            <form action="" method="GET" class="flexbox-item">
-                {{-- <form action="" method="GET" class="display-inline"> --}}
-                    @csrf
-                    <input type="text" name="keyword" value="" >
-                    <input type="submit" value="検索">
-            </form>
+        {{-- 検索機能 --}}
+        <div>
+            <input type="text" name="keyword" placeholder="キーワードを入力" value="" id="keyword">
+            <input type="submit" value="検索">
         </div>
     </header>
 
@@ -35,6 +30,7 @@
             </div> 
         </div>
     </main>
+    <script src="{{ asset('js/script.js') }}"></script>
 </body>
 
 </html>

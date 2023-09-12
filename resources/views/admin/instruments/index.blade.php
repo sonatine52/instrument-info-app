@@ -6,9 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    
-    <!-- Scripts -->
-    {{-- @vite(['resources/sass/app.scss','resources/js/app.js']) --}}
 </head>
 
 <body>
@@ -19,22 +16,30 @@
 
     <main>
         {{-- フラッシュメッセージ --}}
-        @if (session('flash_message'))
-            <p>{{ session('flash_message') }}</p>
-        @endif
-
-        {{-- モーダル --}}
-        {{-- @include('modals.delete_instrument') --}}
+            @if (session('flash_message'))
+                <p>{{ session('flash_message') }}</p>
+            @endif
 
         {{-- 機能ボタン --}}
         <a href="{{ route('admin.instruments.create') }}"><button>新規作成</button></a>
         <a href="{{ route('admin.instruments.edit', ['id' => $instruments[0]->id]) }}" id='edit'><button>編集</button></a>
-        <input type="submit" value="削除" form="delete">
-        {{-- <button type="submit" form="delete">削除</button> --}}
-        {{-- <a href="" data-bs-toggle="modal" data-bs-target="#deleteModal" id='delete'><button>削除</button></a> --}}
+        <input type="submit" value="削除">
+
+        {{-- モーダル --}}
+        <div class="modal-back hidden">
+            <div class="modal-box">
+                <p>削除しますか？</p>
+                <div>
+                    <button type="submit" form="delete">削除</button>
+                    <button id="close-modal">戻る</button>
+                </div>
+            </div>
+        </div>
+
         <form action="{{ route('admin.instruments.destroy', ['id' => $instruments[0]->id]) }}" id='delete' method="post">
             @csrf
             @method('delete')
+
             {{-- レコード一覧 --}}
             <table border="1">
                 <tr>
@@ -50,7 +55,7 @@
                     <tr>
                         <td><input type="radio" name="id" value="{{ $instrument->id }}" @if($loop->first)checked @endif></td>
                         <td>{{ $instrument->name }}</td>
-                        <td><img src="{{ asset('images/'. $instrument->img) }}" alt="" width=100px></td>
+                        <td><img src="{{ asset(str_starts_with($instrument->img, 'images/') ? $instrument->img : 'images/'. $instrument->img) }}" alt="" width=100px></td>
                         <td></td>
                         <td>{{ $instrument->content }}</td>
                         <td>{{ $instrument->category->name }}</td>

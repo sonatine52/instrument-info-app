@@ -24,15 +24,14 @@ class InstrumentController extends Controller
     public function store(Request $request) {
         $request->validate([
             'name' => 'required',
-            // 'img' => 'image',
+            'img' => 'image',
             'category_id' => 'required',
         ]);
 
         $instrument = new Instrument();
         $instrument->name = $request->input('name');
         // 音色データ(未作成)
-        // 画像(仮)
-        $instrument->img = $request->input('img');
+        $instrument->img = $request->file('img')->store('images');
         $instrument->content = $request->input('content');
         $instrument->category_id = $request->input('category_id');
         $instrument->save();
@@ -48,17 +47,17 @@ class InstrumentController extends Controller
     }
 
     // 更新機能
-    public function update(Request $request, Instrument $instrument) {
+    public function update(Request $request, $id) {
         $request->validate([
             'name' => 'required',
-            // 'img' => 'image',
+            'img' => 'image',
             'category_id' => 'required',
         ]);
-
+        
+        $instrument = Instrument::find($id);
         $instrument->name = $request->input('name');
         // 音色データ(未作成)
-        // 画像(仮)
-        $instrument->img = $request->input('img');
+        $instrument->img = $request->file('img')->store('images');
         $instrument->content = $request->input('content');
         $instrument->category_id = $request->input('category_id');
         $instrument->save();

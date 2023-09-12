@@ -27,7 +27,7 @@
         @endif
 
         {{-- フォーム --}}
-        <form action="{{ route('admin.accessories.update', $accessory) }}" method="post">
+        <form action="{{ route('admin.accessories.update', $accessory) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('patch')
             <div>
@@ -39,7 +39,7 @@
                 <label for="">画像</label><br>
                 <div>
                     <p>&lt;更新前&gt;</p>
-                    <img src="{{ asset('images/'. $accessory->img) }}" alt="" style="max-width:200px;" border="1">
+                    <img src="{{ asset(str_starts_with($accessory->img, 'images/') ? $accessory->img : 'images/'. $accessory->img) }}" alt="" style="max-width:200px;" border="1">
                 </div>
                 <div>
                     <p>&lt;更新後&gt;</p>

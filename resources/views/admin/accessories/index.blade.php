@@ -20,13 +20,21 @@
             <p>{{ session('flash_message') }}</p>
         @endif
 
-        {{-- モーダル --}}
-
-
         {{-- 機能ボタン --}}
         <a href="{{ route('admin.accessories.create') }}"><button>新規作成</button></a>
         <a href="{{ route('admin.accessories.edit', ['id' => $accessories[0]->id]) }}" id="edit"><button>編集</button></a>
-        <input type="submit" value="削除" form="delete">
+        <input type="submit" value="削除">
+
+        {{-- モーダル --}}
+        <div class="modal-back hidden">
+            <div class="modal-box">
+                <p>削除しますか？</p>
+                <div>
+                    <button type="submit" form="delete">削除</button>
+                    <button id="close-modal">戻る</button>
+                </div>
+            </div>
+        </div>
 
         <form action="{{ route('admin.accessories.destroy', ['id' => $accessories[0]->id]) }}" id="delete" method="post">
             @csrf
@@ -45,7 +53,7 @@
                     <tr>
                         <td><input type="radio" name="id" value="{{ $accessory->id }}" @if($loop->first)checked @endif></td>
                         <td>{{ $accessory->name }}</td>
-                        <td><img src="{{ asset('images/'. $accessory->img) }}" alt="" width=100px></td>
+                        <td><img src="{{ asset(str_starts_with($accessory->img, 'images/') ? $accessory->img : 'images/'. $accessory->img) }}" alt="" width=100px></td>
                         <td>{{ $accessory->content }}</td>
                         <td>{{ $accessory->instrument->name }}</td>
                     </tr>

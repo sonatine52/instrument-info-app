@@ -25,15 +25,14 @@ class AccessoryController extends Controller
         $request->validate([
             'name' => 'required',
             'instrument_id' => 'required',
-            // 'img' => 'image',
+            'img' => 'image',
         ]);
 
         $accessory = new Accessory();
         $accessory->name = $request->input('name');
         $accessory->content = $request->input('content');
         $accessory->instrument_id = $request->input('instrument_id');
-        // 画像(仮)
-        $accessory->img = $request->input('img');
+        $accessory->img = $request->file('img')->store('images');
         $accessory->save();
 
         return redirect()->route('admin.accessories.index')->with('flash_message', 'レコードを作成しました。');
@@ -47,18 +46,18 @@ class AccessoryController extends Controller
     }
 
     // 更新機能
-    public function update(Request $request, Accessory $accessory) {
+    public function update(Request $request, $id) {
         $request->validate([
             'name' => 'required',
             'instrument_id' => 'required',
-            // 'img' => 'image',
+            'img' => 'image',
         ]);
 
+        $accessory = Accessory::find($id);
         $accessory->name = $request->input('name');
         $accessory->content = $request->input('content');
         $accessory->instrument_id = $request->input('instrument_id');
-        // 画像(仮)
-        $accessory->img =$request->input('img');
+        $accessory->img =$request->file('img')->store('images');
         $accessory->save();
 
         return redirect()->route('admin.accessories.index')->with('flash_message', 'レコードを更新しました。');

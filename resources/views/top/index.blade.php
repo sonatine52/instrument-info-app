@@ -11,14 +11,11 @@
 
     @foreach ($categories as $category)
         @foreach ($category->instruments as $instrument)
-            <a href="{{ route('instrument.detail', $instrument->id) }}">
-                <div class="content">
+                <a href="{{ route('instrument.detail', $instrument->id) }}" class="content" >
                     <h3>{{ $instrument->name }}</h3>
                     <p>{{ $instrument->content }}</p>
-                    {{-- <img src="{{ asset($instrument->img) }}"  width=200px height=200px> --}}
-                    <img src="{{ asset('images/'. $instrument->img) }}"  width=150px>
-                </div>
-            </a>
+                    <img src="{{ asset(str_starts_with($instrument->img, 'images/') ? $instrument->img : 'images/'. $instrument->img) }}" alt="" width=150px>
+                </a>
         @endforeach
     @endforeach
 

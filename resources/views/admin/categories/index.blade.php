@@ -19,14 +19,23 @@
         @if (session('flash_message'))
             <p>{{ session('flash_message') }}</p>
         @endif
-
-        {{-- モーダル --}}
         
-
         {{-- 機能ボタン --}}
         <a href="{{ route('admin.categories.create') }}"><button>新規作成</button></a>
         <a href="{{ route('admin.categories.edit', ['id' => $categories[0]->id]) }}" id='edit'><button>編集</button></a>
-        <input type="submit" value="削除" form="delete">
+        <input type="submit" value="削除">
+
+        {{-- モーダル --}}
+        <div class="modal-back hidden">
+            <div class="modal-box">
+                <p>削除しますか？</p>
+                <div>
+                    <button type="submit" form="delete">削除</button>
+                    <button id="close-modal">戻る</button>
+                </div>
+            </div>
+        </div>
+
         <form action="{{ route('admin.categories.destroy', ['id' => $categories[0]->id]) }}" id='delete' method="post">
             @csrf
             @method('delete')
