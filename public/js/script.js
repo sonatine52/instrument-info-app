@@ -30,50 +30,56 @@ function previewImage(obj)
 
 
 // レコード削除モーダル
-document.querySelector('input[value=削除]').addEventListener('click', () => {
-    document.querySelector('div.modal-back').classList.remove('hidden');
-});
-
-document.getElementById('close-modal').addEventListener('click',() => {
-    document.querySelector('div.modal-back').classList.add('hidden');
-});
+if (document.querySelector('input[value=削除]')) {
+    document.querySelector('input[value=削除]').addEventListener('click', () => {
+        document.querySelector('div.modal-back').classList.remove('hidden');
+    });
+}
+    
+if (document.getElementById('close-modal')) {
+    document.getElementById('close-modal').addEventListener('click',() => {
+        document.querySelector('div.modal-back').classList.add('hidden');
+    });
+}
 
 
 // キーワード検索
-document.querySelector('input[value=検索]').addEventListener('click', () => {
-    // console.log('クリック');
-    const keyword = document.getElementById('keyword').value;
-    // console.log(keyword);
-    const partialMatch = new RegExp(keyword);
-    // console.log(partialMatch);
-
-    const keywordNames = document.querySelectorAll('.content > h3');
-    for (const keywordName of keywordNames) {
-        console.log(keywordName);
-        const result = keywordName.textContent.match(partialMatch);
-        // console.log(result);
-        if(result) {                
+if (document.querySelector('input[value=検索]')) {
+    document.querySelector('input[value=検索]').addEventListener('click', () => {
+        // console.log('クリック');
+        const keyword = document.getElementById('keyword').value;
+        // console.log(keyword);
+        const partialMatch = new RegExp(keyword);
+        // console.log(partialMatch);
+        
+        const keywordNames = document.querySelectorAll('.content > h3');
+        for (const keywordName of keywordNames) {
+            console.log(keywordName);
+            const result = keywordName.textContent.match(partialMatch);
             // console.log(result);
-            keywordName.parentNode.classList.remove('keyword-hidden');
-        } else {
-            keywordName.parentNode.classList.add('keyword-hidden');
-        }
-    };
-
-    const keywordContents = document.querySelectorAll('.keyword-hidden.content > p');
-    for (const keywordContent of keywordContents) {
-        // console.log(keywordContent.textContent);
-        const result = keywordContent.textContent.match(partialMatch);
-        if(result) {                
-            // console.log(result);
-            keywordContent.parentNode.classList.remove('keyword-hidden');
-        } else {
-            keywordContent.parentNode.classList.add('keyword-hidden');
-        }
-    };
-
-});
-
+            if(result) {                
+                // console.log(result);
+                keywordName.parentNode.classList.remove('keyword-hidden');
+            } else {
+                keywordName.parentNode.classList.add('keyword-hidden');
+            }
+        };
+        
+        const keywordContents = document.querySelectorAll('.keyword-hidden.content > p');
+        for (const keywordContent of keywordContents) {
+            // console.log(keywordContent.textContent);
+            const result = keywordContent.textContent.match(partialMatch);
+            if(result) {                
+                // console.log(result);
+                keywordContent.parentNode.classList.remove('keyword-hidden');
+            } else {
+                keywordContent.parentNode.classList.add('keyword-hidden');
+            }
+        };
+        
+    });
+}
+    
 
 // サイドメニュー開閉
 for ( 
@@ -91,11 +97,15 @@ for (
 }
 
 // アクセサリーモーダル
-document.getElementById('accessory-detail').addEventListener('click', () => {
-    document.querySelector('div.modal-back').classList.remove('accessory-hidden');
-});
+if (document.getElementById('accessory-detail')) {
+    document.getElementById('accessory-detail').addEventListener('click', () => {
+        document.querySelector('div.modal-back').classList.remove('accessory-hidden');
+    });
+}
 
-document.getElementById('close-modal').addEventListener('click',() => {
-    document.querySelector('div.modal-back').classList.add('accessory-hidden');
-});
+if (document.getElementById('close-modal')) {
+    document.getElementById('close-modal').addEventListener('click',() => {
+        document.querySelector('div.modal-back').classList.add('accessory-hidden');
+    });
+}
 
